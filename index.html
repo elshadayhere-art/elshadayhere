@@ -1,0 +1,1348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Elshaday Bikis, Design Researcher</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #F7F4EF;
+  --bg2: #EDEAE3;
+  --ink: #1A1814;
+  --ink2: #4A4640;
+  --ink3: #9A9088;
+  --accent: #C4622A;
+  --accent2: #D4784A;
+  --white: #FDFCFA;
+  --rule: rgba(26,24,20,0.1);
+  --font-serif: 'Fraunces', Georgia, serif;
+  --font-sans: 'DM Sans', sans-serif;
+  --nav-h: 60px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  font-weight: 300;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: var(--bg2); }
+::-webkit-scrollbar-thumb { background: var(--ink3); border-radius: 2px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  background: rgba(247,244,239,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--rule);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 52px;
+  z-index: 1000;
+}
+
+.nav-logo {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--ink);
+  cursor: pointer;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.nav-logo span { color: var(--accent); font-style: italic; }
+
+.nav-links {
+  display: flex;
+  gap: 32px;
+  list-style: none;
+}
+.nav-links a {
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  color: var(--ink2);
+  text-decoration: none;
+  transition: color 0.2s;
+  cursor: pointer;
+}
+.nav-links a:hover, .nav-links a.active { color: var(--accent); }
+
+/* ── PAGE SWITCHING ── */
+.page { display: none; min-height: 100vh; padding-top: var(--nav-h); }
+.page.active { display: block; }
+#case-detail { display: none; min-height: 100vh; padding-top: var(--nav-h); }
+#case-detail.active { display: block; }
+
+/* ── FADE IN ── */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.fi { opacity: 0; animation: fadeIn 0.65s ease forwards; }
+.fi:nth-child(1) { animation-delay: 0.05s; }
+.fi:nth-child(2) { animation-delay: 0.15s; }
+.fi:nth-child(3) { animation-delay: 0.25s; }
+.fi:nth-child(4) { animation-delay: 0.35s; }
+.fi:nth-child(5) { animation-delay: 0.45s; }
+.fi:nth-child(6) { animation-delay: 0.55s; }
+
+/* ══════════════════════════════
+   HOME
+══════════════════════════════ */
+.home-hero {
+  min-height: calc(100vh - var(--nav-h));
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 100px 52px 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.home-left { padding-top: 20px; }
+
+.home-nums {
+  display: flex;
+  gap: 40px;
+  padding: 28px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin: 32px 0 36px;
+}
+.home-num { }
+.home-num-val {
+  font-family: var(--font-serif);
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.home-num-label {
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 5px;
+  display: block;
+}
+
+.home-index {
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-bottom: 32px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.home-index::before {
+  content: '';
+  display: inline-block;
+  width: 28px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.home-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(3.2rem, 6vw, 5.5rem);
+  font-weight: 300;
+  line-height: 1.05;
+  letter-spacing: -0.03em;
+  margin-bottom: 32px;
+  color: var(--ink);
+}
+.home-h1 em {
+  font-style: italic;
+  color: var(--accent);
+  font-weight: 300;
+}
+
+.home-statement {
+  font-size: 1.05rem;
+  color: var(--ink2);
+  max-width: 500px;
+  line-height: 1.75;
+  margin-bottom: 28px;
+}
+
+.home-learning {
+  font-size: 1rem;
+  color: var(--ink);
+  max-width: 500px;
+  line-height: 1.8;
+  padding: 20px 24px;
+  border-left: 2px solid var(--accent);
+  background: rgba(196,98,42,0.04);
+  margin-bottom: 40px;
+}
+.home-learning em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+  font-size: 1.05rem;
+}
+
+.home-actions {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.btn {
+  display: inline-block;
+  padding: 11px 24px;
+  font-size: 0.8rem;
+  font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: 0.04em;
+  border-radius: 4px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s;
+  border: none;
+}
+.btn-dark {
+  background: var(--ink);
+  color: var(--bg);
+}
+.btn-dark:hover { background: var(--accent); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent;
+  color: var(--ink2);
+  border: 1px solid var(--rule);
+}
+.btn-ghost:hover { border-color: var(--ink2); color: var(--ink); }
+
+/* Right column */
+.home-right {
+  padding-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.home-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--bg2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: relative;
+}
+.home-photo img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: grayscale(20%);
+}
+.home-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 6rem;
+  font-style: italic;
+  color: var(--ink3);
+  background: var(--bg2);
+}
+
+.home-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+.home-tag {
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--ink3);
+  padding: 4px 12px;
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+}
+
+/* Quick numbers */
+.home-nums {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.home-num {
+  padding: 16px 12px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  text-align: center;
+}
+.home-num-val {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--accent);
+  display: block;
+  line-height: 1;
+}
+.home-num-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink3);
+  margin-top: 4px;
+  display: block;
+}
+
+/* ══════════════════════════════
+   ABOUT
+══════════════════════════════ */
+.about-wrap {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 80px 52px 120px;
+}
+
+.page-eyebrow {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.page-eyebrow::before {
+  content: '';
+  display: inline-block;
+  width: 24px;
+  height: 1px;
+  background: var(--accent);
+}
+
+.page-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.2rem, 4vw, 3.2rem);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  margin-bottom: 64px;
+  color: var(--ink);
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 72px;
+  align-items: start;
+  margin-bottom: 80px;
+}
+
+.about-photo {
+  width: 100%;
+  aspect-ratio: 3/4;
+  background: var(--bg2);
+  border-radius: 4px;
+  overflow: hidden;
+  position: sticky;
+  top: 80px;
+}
+.about-photo img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(10%); }
+.about-photo-placeholder {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-serif);
+  font-size: 5rem;
+  font-style: italic;
+  color: var(--ink3);
+}
+
+.about-text p {
+  font-size: 0.97rem;
+  color: var(--ink2);
+  line-height: 1.85;
+  margin-bottom: 18px;
+}
+.about-text p:first-child {
+  font-family: var(--font-serif);
+  font-size: 1.25rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.65;
+}
+.about-text em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* Education */
+.section-divider {
+  border: none;
+  border-top: 1px solid var(--rule);
+  margin: 56px 0;
+}
+
+.section-h2 {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 36px;
+}
+
+.edu-list { display: flex; flex-direction: column; }
+
+.edu-item {
+  display: grid;
+  grid-template-columns: 120px 1fr;
+  gap: 32px;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--rule);
+}
+.edu-item:first-child { border-top: 1px solid var(--rule); }
+
+.edu-year {
+  font-size: 0.72rem;
+  color: var(--accent);
+  letter-spacing: 0.08em;
+  padding-top: 2px;
+  font-weight: 500;
+}
+.edu-degree {
+  font-weight: 500;
+  font-size: 0.95rem;
+  color: var(--ink);
+  margin-bottom: 3px;
+}
+.edu-school { font-size: 0.85rem; color: var(--ink3); margin-bottom: 8px; }
+.edu-desc { font-size: 0.83rem; color: var(--ink2); line-height: 1.65; }
+
+/* Skills */
+.skills-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+.skill-row {
+  padding: 24px 28px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+}
+.skill-cat {
+  font-size: 0.62rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 8px;
+}
+.skill-items {
+  font-size: 0.85rem;
+  color: var(--ink2);
+  line-height: 1.7;
+}
+
+/* ══════════════════════════════
+   WORK
+══════════════════════════════ */
+.work-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 52px 120px;
+}
+
+.work-intro {
+  max-width: 520px;
+  margin-bottom: 72px;
+}
+.work-intro p { font-size: 0.95rem; color: var(--ink2); line-height: 1.8; }
+
+/* Case list, editorial style, NOT cards */
+.case-list { display: flex; flex-direction: column; }
+
+.case-row {
+  display: grid;
+  grid-template-columns: 60px 1fr 200px;
+  gap: 32px;
+  padding: 40px 0;
+  border-bottom: 1px solid var(--rule);
+  cursor: pointer;
+  transition: all 0.2s;
+  align-items: start;
+  position: relative;
+}
+.case-row:first-child { border-top: 1px solid var(--rule); }
+.case-row::after {
+  content: '→';
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1rem;
+  color: var(--ink3);
+  opacity: 0;
+  transition: opacity 0.2s, right 0.2s;
+}
+.case-row:hover::after { opacity: 1; right: -4px; }
+.case-row:hover { padding-left: 6px; }
+.case-row:hover .case-row-num { color: var(--accent); }
+
+.case-row-num {
+  font-family: var(--font-serif);
+  font-size: 0.75rem;
+  color: var(--ink3);
+  font-style: italic;
+  padding-top: 4px;
+  transition: color 0.2s;
+}
+
+.case-row-body {}
+
+.case-row-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 10px;
+}
+.case-tag {
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--ink3);
+  text-transform: uppercase;
+}
+.case-tag + .case-tag::before {
+  content: '·';
+  margin-right: 6px;
+  color: var(--ink3);
+}
+
+.case-row-title {
+  font-family: var(--font-serif);
+  font-size: clamp(1.2rem, 2vw, 1.6rem);
+  font-weight: 300;
+  line-height: 1.25;
+  color: var(--ink);
+  margin-bottom: 10px;
+  transition: color 0.2s;
+}
+.case-row:hover .case-row-title { color: var(--accent); }
+
+.case-row-desc {
+  font-size: 0.85rem;
+  color: var(--ink3);
+  line-height: 1.7;
+  max-width: 480px;
+}
+
+.case-row-meta {
+  text-align: right;
+  padding-top: 4px;
+}
+.meta-label {
+  font-size: 0.6rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--ink3);
+  margin-bottom: 3px;
+}
+.meta-val {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink2);
+  margin-bottom: 14px;
+}
+
+/* ══════════════════════════════
+   CASE DETAIL
+══════════════════════════════ */
+.detail-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 52px 52px 140px;
+}
+
+.detail-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--ink3);
+  cursor: pointer;
+  margin-bottom: 52px;
+  background: none;
+  border: none;
+  font-family: var(--font-sans);
+  transition: color 0.2s;
+  padding: 0;
+}
+.detail-back:hover { color: var(--accent); }
+
+.detail-kicker {
+  font-size: 0.65rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.detail-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  color: var(--ink);
+}
+
+.detail-sub {
+  font-size: 0.97rem;
+  color: var(--ink2);
+  line-height: 1.7;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+
+.detail-meta {
+  display: flex;
+  gap: 48px;
+  padding: 20px 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+}
+.d-meta-lbl { font-size: 0.6rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ink3); margin-bottom: 3px; }
+.d-meta-val { font-size: 0.88rem; font-weight: 500; color: var(--ink); }
+
+/* Body content */
+.d-h2 {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  margin: 48px 0 16px;
+}
+
+.d-p {
+  font-size: 0.95rem;
+  color: var(--ink2);
+  line-height: 1.85;
+  margin-bottom: 14px;
+}
+
+.d-ul {
+  list-style: none;
+  margin-bottom: 16px;
+}
+.d-ul li {
+  font-size: 0.93rem;
+  color: var(--ink2);
+  line-height: 1.75;
+  padding-left: 20px;
+  position: relative;
+  margin-bottom: 8px;
+}
+.d-ul li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  color: var(--accent);
+  font-size: 0.8rem;
+}
+
+.d-methods {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 20px 0 28px;
+}
+.d-method {
+  background: var(--white);
+  padding: 20px 18px;
+}
+.d-method-name {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--ink);
+  margin-bottom: 6px;
+}
+.d-method-desc { font-size: 0.78rem; color: var(--ink3); line-height: 1.6; }
+
+.d-pull {
+  border-left: 2px solid var(--accent);
+  padding: 16px 24px;
+  margin: 28px 0;
+  background: rgba(196,98,42,0.04);
+}
+.d-pull p {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  font-style: italic;
+  color: var(--ink);
+  line-height: 1.6;
+}
+
+.d-findings {
+  border-top: 1px solid var(--rule);
+  margin: 8px 0;
+}
+.d-finding {
+  display: grid;
+  grid-template-columns: 70px 1fr;
+  gap: 16px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+.d-finding-stat {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+.d-finding-text { font-size: 0.88rem; color: var(--ink2); line-height: 1.65; }
+
+.d-outcome {
+  background: var(--bg2);
+  border-radius: 4px;
+  padding: 28px 32px;
+  margin: 20px 0;
+}
+.d-outcome p {
+  font-size: 0.95rem;
+  color: var(--ink);
+  line-height: 1.8;
+}
+
+.d-learnings { display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--rule); margin-top: 20px; }
+.d-learning {
+  padding: 24px 0;
+  border-bottom: 1px solid var(--rule);
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 8px;
+}
+.d-learning-title {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--ink);
+}
+.d-learning-body { font-size: 0.88rem; color: var(--ink2); line-height: 1.7; }
+
+.d-recs {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin: 20px 0;
+}
+.d-rec {
+  background: var(--white);
+  padding: 22px 20px;
+}
+.d-rec-title { font-size: 0.85rem; font-weight: 500; color: var(--accent); margin-bottom: 7px; }
+.d-rec-body { font-size: 0.8rem; color: var(--ink3); line-height: 1.65; }
+
+/* ══════════════════════════════
+   AFTER HOURS
+══════════════════════════════ */
+.ah-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 80px 52px 120px;
+}
+
+.ah-intro {
+  max-width: 460px;
+  margin-bottom: 72px;
+}
+.ah-intro p { font-size: 0.95rem; color: var(--ink2); line-height: 1.8; }
+
+.ah-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+}
+
+.ah-item {
+  padding: 40px 44px;
+  border-right: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  transition: background 0.25s;
+}
+.ah-item:hover { background: var(--bg2); }
+
+.ah-num {
+  font-family: var(--font-serif);
+  font-size: 0.68rem;
+  font-style: italic;
+  color: var(--ink3);
+  margin-bottom: 24px;
+}
+.ah-title {
+  font-family: var(--font-serif);
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: var(--ink);
+  margin-bottom: 14px;
+}
+.ah-body { font-size: 0.88rem; color: var(--ink2); line-height: 1.8; }
+
+/* ══════════════════════════════
+   CONTACT
+══════════════════════════════ */
+.contact-wrap {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 120px 52px 140px;
+}
+
+.contact-h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+  margin-bottom: 24px;
+  color: var(--ink);
+}
+.contact-h1 em { font-style: italic; color: var(--accent); }
+
+.contact-sub {
+  font-size: 0.97rem;
+  color: var(--ink2);
+  line-height: 1.8;
+  margin-bottom: 56px;
+  max-width: 420px;
+}
+
+.contact-list { display: flex; flex-direction: column; }
+
+.contact-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--rule);
+  text-decoration: none;
+  color: var(--ink);
+  transition: padding-left 0.2s;
+  group: true;
+}
+.contact-list .contact-link:first-child { border-top: 1px solid var(--rule); }
+.contact-link:hover { padding-left: 8px; }
+.contact-link:hover .cl-arrow { color: var(--accent); }
+
+.cl-left { display: flex; flex-direction: column; gap: 3px; }
+.cl-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink3); }
+.cl-val { font-family: var(--font-serif); font-size: 1.1rem; font-weight: 300; color: var(--ink); }
+.cl-arrow { font-size: 1rem; color: var(--ink3); transition: color 0.2s; }
+
+.contact-note {
+  font-size: 0.8rem;
+  color: var(--ink3);
+  line-height: 1.7;
+  margin-top: 48px;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  nav { padding: 0 20px; }
+  .nav-links a { font-size: 0.72rem; }
+  .nav-links { gap: 20px; }
+  .home-hero { padding: 60px 20px 80px; }
+  .about-wrap, .work-wrap, .ah-wrap, .contact-wrap, .detail-wrap { padding: 48px 20px 80px; }
+  .about-grid { grid-template-columns: 1fr; gap: 36px; }
+  .about-photo { position: static; max-width: 260px; }
+  .skills-list { grid-template-columns: 1fr; }
+  .case-row { grid-template-columns: 40px 1fr; gap: 16px; }
+  .case-row-meta { display: none; }
+  .ah-grid { grid-template-columns: 1fr; }
+  .d-methods { grid-template-columns: 1fr; }
+  .d-recs { grid-template-columns: 1fr; }
+  .d-findings .d-finding { grid-template-columns: 60px 1fr; }
+  .edu-item { grid-template-columns: 80px 1fr; gap: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" onclick="showPage('home')">Elsha<span>day</span></a>
+  <ul class="nav-links">
+    <li><a onclick="showPage('home')" id="nav-home" class="active">Home</a></li>
+    <li><a onclick="showPage('work')" id="nav-work">Work</a></li>
+    <li><a onclick="showPage('after-hours')" id="nav-after-hours">After Hours</a></li>
+    <li><a onclick="showPage('contact')" id="nav-contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ══ HOME ══ -->
+<div id="home" class="page active">
+  <div class="home-hero">
+    <div class="home-left">
+      <p class="home-index fi">Design Researcher</p>
+      <h1 class="home-h1 fi">Hi, I am<br><em>Elshaday.</em></h1>
+      <p class="home-statement fi">I'm a design researcher with a background in biology, journalism, healthcare, and research commercialization. I believe in learning-it-all, which is why I move across industries with ease and why every new field feels less like a leap and more like the next chapter.</p>
+      <div class="home-nums fi">
+        <div class="home-num"><span class="home-num-val">5</span><span class="home-num-label">Case Studies</span></div>
+        <div class="home-num"><span class="home-num-val">100+</span><span class="home-num-label">Interviews</span></div>
+        <div class="home-num"><span class="home-num-val">4</span><span class="home-num-label">Industries</span></div>
+      </div>
+      <div class="home-actions fi">
+        <button class="btn btn-dark" onclick="showPage('work')">View My Work</button>
+        <button class="btn btn-ghost" onclick="showPage('contact')">Get In Touch</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- ══ WORK ══ -->
+<div id="work" class="page">
+  <div class="work-wrap">
+    <p class="page-eyebrow fi">Work</p>
+    <h2 class="page-h1 fi">Research projects<br>across five industries.</h2>
+    <div class="work-intro fi">
+      <p>Each project reflects a commitment to immersive research, actionable insight, and human-centered thinking, from healthcare to fintech to adaptive eyewear.</p>
+    </div>
+    <div class="case-list">
+
+      <div class="case-row fi" onclick="showCase('paper')">
+        <div class="case-row-num">01</div>
+        <div class="case-row-body">
+          <div class="case-row-tags">
+            <span class="case-tag">Market Research</span>
+            <span class="case-tag">Education</span>
+            <span class="case-tag">User Testing</span>
+          </div>
+          <div class="case-row-title">Who Needs Chemistry Without a Lab?</div>
+          <div class="case-row-desc">Explored new markets for paper titrators post-pandemic through 50+ interviews, ultimately reframing the product from pandemic replacement to classroom supplement.</div>
+        </div>
+        <div class="case-row-meta">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Market Research Consultant</div>
+          <div class="meta-label">Duration</div>
+          <div class="meta-val">11 Months</div>
+        </div>
+      </div>
+
+      <div class="case-row fi" onclick="showCase('brex')">
+        <div class="case-row-num">02</div>
+        <div class="case-row-body">
+          <div class="case-row-tags">
+            <span class="case-tag">Fintech</span>
+            <span class="case-tag">Thematic Analysis</span>
+            <span class="case-tag">Stakeholder Interviews</span>
+          </div>
+          <div class="case-row-title">When Do Startups Finally Break Up with Their Bank?</div>
+          <div class="case-row-desc">Interviewed 11 startup founders to uncover banking barriers and motivations, delivering targeted recommendations that helped Brex secure two new clients.</div>
+        </div>
+        <div class="case-row-meta">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Freelance UX Researcher</div>
+          <div class="meta-label">Duration</div>
+          <div class="meta-val">2 Weeks</div>
+        </div>
+      </div>
+
+      <div class="case-row fi" onclick="showCase('soil')">
+        <div class="case-row-num">03</div>
+        <div class="case-row-body">
+          <div class="case-row-tags">
+            <span class="case-tag">Agriculture</span>
+            <span class="case-tag">Market Validation</span>
+            <span class="case-tag">User Testing</span>
+          </div>
+          <div class="case-row-title">Validating Market Fit for Innovative Soil Testing</div>
+          <div class="case-row-desc">Explored market adoption for a biological phosphorus soil testing method through 21 interviews and user testing with 19 participants.</div>
+        </div>
+        <div class="case-row-meta">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Insight Analyst</div>
+          <div class="meta-label">Duration</div>
+          <div class="meta-val">5 Months</div>
+        </div>
+      </div>
+
+      <div class="case-row fi" onclick="showCase('clinic')">
+        <div class="case-row-num">04</div>
+        <div class="case-row-body">
+          <div class="case-row-tags">
+            <span class="case-tag">Healthcare</span>
+            <span class="case-tag">Systems Design</span>
+            <span class="case-tag">Operational Analysis</span>
+          </div>
+          <div class="case-row-title">How Might We Cut Clinical Training Time in Half?</div>
+          <div class="case-row-desc">Designed a documentation framework for an ophthalmology clinic, cutting onboarding from 6 weeks to 3–4 weeks and saving doctors 10+ minutes per appointment.</div>
+        </div>
+        <div class="case-row-meta">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Clinical Technician</div>
+          <div class="meta-label">Duration</div>
+          <div class="meta-val">4 Months</div>
+        </div>
+      </div>
+
+      <div class="case-row fi" onclick="showCase('roi')">
+        <div class="case-row-num">05</div>
+        <div class="case-row-body">
+          <div class="case-row-tags">
+            <span class="case-tag">Vision Technology</span>
+            <span class="case-tag">Systems Design</span>
+            <span class="case-tag">Startup Research</span>
+          </div>
+          <div class="case-row-title">Glasses for Life, Rethinking Vision as Living Data</div>
+          <div class="case-row-desc">As founder of Ro'i, led design research into adaptive eyewear using liquid crystal lenses, exploring how prescriptions could become software, updated by opticians without replacing frames.</div>
+        </div>
+        <div class="case-row-meta">
+          <div class="meta-label">Role</div>
+          <div class="meta-val">Founder & Researcher</div>
+          <div class="meta-label">Stage</div>
+          <div class="meta-val">Active Development</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ══ CASE DETAIL ══ -->
+<div id="case-detail">
+  <div class="detail-wrap" id="detail-content"></div>
+</div>
+
+<!-- ══ AFTER HOURS ══ -->
+<div id="after-hours" class="page">
+  <div class="ah-wrap">
+    <p class="page-eyebrow fi">After Hours</p>
+    <h2 class="page-h1 fi">Life outside the research.</h2>
+    <div class="ah-intro fi">
+      <p>The same curiosity that drives my work shows up everywhere. Here's what I get up to when I'm not in the field.</p>
+    </div>
+    <div class="ah-grid">
+      <div class="ah-item fi">
+        <div class="ah-num">01</div>
+        <div class="ah-title">Running</div>
+        <div class="ah-body">I love running, usually on the trails in my neighborhood. Logging miles on Strava gives me small wins every time I finish a run. I recently completed a half marathon and am now training for a full marathon.</div>
+      </div>
+      <div class="ah-item fi">
+        <div class="ah-num">02</div>
+        <div class="ah-title">Book Club</div>
+        <div class="ah-body">Tuesday night is book club night, a club I accidentally started. I overheard a group of strangers talking about a book, thought it was a club, and just joined in. Turns out it wasn't... but we ended up starting one anyway.</div>
+      </div>
+      <div class="ah-item fi">
+        <div class="ah-num">03</div>
+        <div class="ah-title">Modeling</div>
+        <div class="ah-body">I model, and I enjoy it because I get to be a medium for artists to communicate their vision to the world. It's exciting to see how clothes, photography, and styling comes together.</div>
+      </div>
+      <div class="ah-item fi">
+        <div class="ah-num">04</div>
+        <div class="ah-title">Film</div>
+        <div class="ah-body">I love movies, especially the kind that show lives far from mine but still feel relatable. Always open to good recs, seriously, send them my way. Good Will Hunting is my #1 all-time favorite.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div id="contact" class="page">
+  <div class="contact-wrap">
+    <p class="page-eyebrow fi">Contact</p>
+    <h2 class="contact-h1 fi">Always curious,<br><em>always open.</em></h2>
+    <p class="contact-sub fi">Whether you have a research challenge, a collaboration idea, or just want to talk, I'd love to hear from you.</p>
+    <div class="contact-list fi">
+      <a href="/cdn-cgi/l/email-protection#88ede4fbe0e9ece9f1e0edfaedc8efe5e9e1e4a6ebe7e5" class="contact-link">
+        <div class="cl-left">
+          <span class="cl-label">Email</span>
+          <span class="cl-val"><span class="__cf_email__" data-cfemail="95f0f9e6fdf4f1f4ecfdf0e7f0d5f2f8f4fcf9bbf6faf8">[email&#160;protected]</span></span>
+        </div>
+        <span class="cl-arrow">↗</span>
+      </a>
+      <a href="https://www.linkedin.com/in/elshaday-bikis" target="_blank" class="contact-link">
+        <div class="cl-left">
+          <span class="cl-label">LinkedIn</span>
+          <span class="cl-val">/in/elshaday-bikis</span>
+        </div>
+        <span class="cl-arrow">↗</span>
+      </a>
+    </div>
+    <p class="contact-note fi">Based in the US · Open to research internships & collaborations<br>MSc Engineering Science & Technology Entrepreneurship, University of Notre Dame, 2024</p>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+const cases = {
+  paper: {
+    kicker: "Market Research · Education",
+    title: "Who Needs Chemistry Without a Lab?",
+    sub: "Discovering new opportunities for paper microfluidic labware in educational settings post-pandemic.",
+    role: "Market Research Consultant", company: "Paper Analytics / Notre Dame", duration: "11 Months",
+    body: `
+      <div class="d-h2">Context</div>
+      <p class="d-p">Paper Analytics, a startup out of Notre Dame, created paper titrators: paper-based lab tools that change color to indicate chemical reactions. During the pandemic, colleges adopted them widely so students could run chemistry experiments remotely. But once labs reopened, colleges had no reason to keep using them. Adoption collapsed and Paper Analytics needed to find out who else might need them.</p>
+
+      <div class="d-h2">The Challenge</div>
+      <p class="d-p">Who needs chemistry education, lacks lab access, and values safety and affordability?</p>
+
+      <div class="d-h2">Methodologies</div>
+      <div class="d-methods">
+        <div class="d-method"><div class="d-method-name">Stakeholder Interviews</div><div class="d-method-desc">50+ interviews with professors, educators, students, prison staff, and homeschooling parents</div></div>
+        <div class="d-method"><div class="d-method-name">User Testing</div><div class="d-method-desc">Tested paper titrators in high schools to gather real usability feedback</div></div>
+        <div class="d-method"><div class="d-method-name">Qualitative Data Analysis</div><div class="d-method-desc">Analyzed interview and testing data to identify patterns and market signals</div></div>
+      </div>
+
+      <div class="d-h2">Exploration Journey</div>
+      <p class="d-p">I started with the obvious market, colleges, but once labs reopened, professors had little reason to use paper versions. That dead end pushed me to explore further:</p>
+      <ul class="d-ul">
+        <li><strong>Correctional facilities:</strong> Many facilities were receiving education funding through Pell Grants and lacked access to proper lab equipment, so on paper they seemed like a strong fit. But inmates gravitated toward vocational trades with clear job pathways, and strict chemical restrictions made lab tools a non-starter.</li>
+        <li><strong>Underfunded high schools:</strong> Teachers loved the safety and affordability, but titration with glassware was still required for AP exams.</li>
+        <li><strong>Homeschooling:</strong> Parents wanted bundled, all-in-one science kits. A single standalone tool didn't fit their needs.</li>
+      </ul>
+      <div class="d-pull"><p>"Teachers didn't want to replace traditional labs. They wanted a safe, affordable supplement."</p></div>
+
+      <div class="d-h2">The Pivot</div>
+      <p class="d-p">Instead of pitching paper titrators as a competitor to glassware, I re-framed them as a supplementary learning tool: a hands-on intro activity before moving to glass, a safe way to practice without hazardous chemicals, and an accessible tool for sustainability lessons.</p>
+
+      <div class="d-h2">Outcome</div>
+      <div class="d-outcome"><p>This shift gave paper titrators a new role, not a pandemic stopgap, but a flexible classroom aid. Teachers could use paper titrators as an alternative way to explain titration before moving to glassware. At as little as $0.05 per unit, and with students genuinely enjoying the hands-on format, the value wasn't replacement, it was a new entry point into the subject. By pivoting based on real-world feedback, I helped Paper Analytics identify a viable path for their product.</p></div>
+
+      <div class="d-h2">Key Learnings</div>
+      <div class="d-learnings">
+        <div class="d-learning"><div class="d-learning-title">Validated Hypothesis ≠ Adoption</div><div class="d-learning-body">Teachers valued cost-effectiveness and safety, but AP exam requirements prevented full adoption. A validated hypothesis can still face external constraints, it's okay to adapt and refine.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Revisit Findings with Fresh Eyes</div><div class="d-learning-body">After high schools showed resistance, I realized they could still use the product as a complementary tool. Re-examining data from different angles uncovers hidden opportunities.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Context Matters in Storytelling</div><div class="d-learning-body">Being close to the project, I often jumped into details without providing background. Presenting research requires stepping back to ensure your audience has the context they need.</div></div>
+      </div>
+    `
+  },
+
+  brex: {
+    kicker: "Fintech · Stakeholder Interviews · Thematic Analysis",
+    title: "When Do Startups Finally Break Up with Their Bank?",
+    sub: "Uncovering why startups weren't aware of Brex's business accounts and how to motivate them to deposit money.",
+    role: "Freelance UX Researcher", company: "Brex", duration: "2 Weeks",
+    body: `
+      <div class="d-h2">Overview</div>
+      <p class="d-p">Startups rarely think about switching banks until something forces them to. Brex, already established as a credit card provider for tech startups, was expanding into business accounts and wanted to understand: when do founders actually consider moving their money, and what pushes them over the edge? As a freelance UX researcher, I was brought in to uncover the triggers, barriers, and motivations behind startup banking decisions, and to find out why so few founders even knew Brex offered business accounts.</p>
+
+      <div class="d-h2">Methodologies</div>
+      <div class="d-methods">
+        <div class="d-method"><div class="d-method-name">Stakeholder Interviews</div><div class="d-method-desc">11 in-depth interviews with startup founders across Brex customers and non-customers. Given the two-week timeline, a small purposive sample was selected to maximize diversity of perspective within the constraint.</div></div>
+        <div class="d-method"><div class="d-method-name">Thematic Analysis</div><div class="d-method-desc">Identified key themes across participants to surface patterns in decision-making</div></div>
+        <div class="d-method"><div class="d-method-name">Hypothesis Refinement</div><div class="d-method-desc">Continuously refined research focus based on early findings</div></div>
+      </div>
+
+      <div class="d-h2">Key Findings</div>
+      <p class="d-p">A striking pattern emerged early: most founders didn't know Brex even offered business accounts. They knew the card. The bank account was invisible, largely because Brex had not yet built strong awareness among existing cardholders for this product line.</p>
+      <div class="d-findings">
+        <div class="d-finding"><div class="d-finding-stat">7/11</div><div class="d-finding-text">selected their bank based on recommendations from colleagues, university networks, or investors</div></div>
+        <div class="d-finding"><div class="d-finding-stat">6/11</div><div class="d-finding-text">identified poor user interface as a reason for wanting to switch banks</div></div>
+        <div class="d-finding"><div class="d-finding-stat">5/11</div><div class="d-finding-text">cited time and effort of switching, especially re-subscribing to software services, as the major barrier</div></div>
+        <div class="d-finding"><div class="d-finding-stat">5/11</div><div class="d-finding-text">sought better interest rates as they raised more funds</div></div>
+      </div>
+
+      <div class="d-pull"><p>"Startups are most receptive to switching during key transition points, funding rounds. Timing matters more than features."</p></div>
+
+      <div class="d-h2">Recommendations</div>
+      <div class="d-recs">
+        <div class="d-rec"><div class="d-rec-title">Target Funding Rounds</div><div class="d-rec-body">Focus marketing on startups during significant funding rounds when they're most likely to consider switching and making large deposits.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Leverage Existing Users</div><div class="d-rec-body">Promote business accounts to Brex cardholders through in-app notifications. Founders frequently check notification bars.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Quantify Long-Term Value</div><div class="d-rec-body">Create an interactive savings calculator to show startups their potential savings over five years, interviewees emphasized clearly quantifying benefits.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Automate Software Re-Subscription</div><div class="d-rec-body">Build a tool that tracks and transfers recurring payments when a startup switches banks, removing the #1 friction point founders face.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Incentivize Deposits</div><div class="d-rec-body">Offer onboarding bonuses with time-sensitive conditions to create urgency.</div></div>
+      </div>
+
+      <div class="d-h2">Outcome</div>
+      <div class="d-outcome"><p>This project helped Brex secure two new clients by providing actionable insights into startup founders' banking pain points and motivations. Targeted recommendations addressed real user needs rather than assumed product gaps.</p></div>
+
+      <div class="d-h2">Key Learnings</div>
+      <div class="d-learnings">
+        <div class="d-learning"><div class="d-learning-title">Timing Matters More Than Features</div><div class="d-learning-body">Identifying the right moment in a company's journey, a funding round, a major transition, can be more important than product superiority when it comes to adoption.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Don't Underestimate Practical Barriers</div><div class="d-learning-body">Despite compelling benefits, founders stayed with suboptimal banks due to switching friction. Research must examine not just what makes a product attractive, but what prevents adoption.</div></div>
+      </div>
+    `
+  },
+
+  soil: {
+    kicker: "Agriculture · Market Validation · User Testing",
+    title: "Validating Market Fit for Innovative Soil Testing",
+    sub: "Exploring market adoption for a novel biological process to measure bio-available phosphorus in soil testing.",
+    role: "Insight Analyst", company: "IDEA Center, University of Notre Dame", duration: "Five Months",
+    body: `
+      <div class="d-h2">Overview</div>
+      <p class="d-p">I was tasked with exploring market adoption for an innovative soil testing method that measures bio-available phosphorus (BAP) using a biological process. The technology aimed to provide more accurate soil nutrient measurements compared to existing chemical-based methods. My challenge: validate market interest and identify potential barriers to adoption.</p>
+
+      <div class="d-h2">Methodologies</div>
+      <div class="d-methods">
+        <div class="d-method"><div class="d-method-name">Stakeholder Interviews</div><div class="d-method-desc">21 in-depth interviews with farmers, gardeners, and soil testing professionals</div></div>
+        <div class="d-method"><div class="d-method-name">Competitive Analysis</div><div class="d-method-desc">Examined existing soil testing methods and market positioning</div></div>
+        <div class="d-method"><div class="d-method-name">User Testing</div><div class="d-method-desc">Evaluated usability with 19 participants to gather hands-on feedback</div></div>
+      </div>
+
+      <div class="d-h2">Key Findings</div>
+      <div class="d-findings">
+        <div class="d-finding"><div class="d-finding-stat">9/20</div><div class="d-finding-text">participants found the idea interesting, but interest didn't translate to purchase intent</div></div>
+        <div class="d-finding"><div class="d-finding-stat">5/20</div><div class="d-finding-text">were genuinely excited and willing to try the product</div></div>
+        <div class="d-finding"><div class="d-finding-stat">31.5%</div><div class="d-finding-text">expressed willingness to try the new method after hands-on testing</div></div>
+      </div>
+      <p class="d-p">Main barriers: the product requires a 4-day testing period, which most users found too slow for practical use. The product also only measures bio-available phosphorus (BAP), but farmers and gardeners wanted a more holistic view of soil health. Some participants also felt existing chemical-based methods were more accurate and better established.</p>
+
+      <div class="d-h2">Recommendations</div>
+      <div class="d-recs">
+        <div class="d-rec"><div class="d-rec-title">Reduce Testing Time</div><div class="d-rec-body">Significantly decrease the 4-day testing period to compete with existing solutions.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Expand Testing Capabilities</div><div class="d-rec-body">Incorporate testing for nutrients more directly relevant to plant growth, such as nitrogen, potassium, and calcium, to provide a more actionable soil profile for farmers and gardeners.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Highlight Eco Value Proposition</div><div class="d-rec-body">Develop marketing that emphasizes the eco-friendly and accurate aspects of the method.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Target the Right Segment</div><div class="d-rec-body">Focus on environmentally conscious farmers who prioritize sustainable agricultural practices.</div></div>
+      </div>
+
+      <div class="d-h2">Outcome</div>
+      <div class="d-outcome"><p>While immediate market adoption seemed unlikely, the research revealed potential for future development. By addressing the testing time barrier and expanding nutrient analysis, the soil testing method could become a viable solution for environmentally conscious agricultural professionals.</p></div>
+
+      <div class="d-h2">Key Learning</div>
+      <div class="d-learnings">
+        <div class="d-learning"><div class="d-learning-title">"Interesting" Doesn't Mean "Interested"</div><div class="d-learning-body">Polite feedback like "it's interesting" often masks a lack of genuine purchase intent. The importance of reading between the lines and seeking concrete indicators of adoption beyond surface-level enthusiasm.</div></div>
+      </div>
+    `
+  },
+
+  clinic: {
+    kicker: "Healthcare · Systems Design · Operational Analysis",
+    title: "How Might We Cut Clinical Training Time in Half?",
+    sub: "Designing employee training and documentation systems at an ophthalmology clinic to improve staff efficiency, patient outcomes, and clinic operations.",
+    role: "Clinical Technician", company: "Eye Physicians and Surgeons", duration: "4 Months",
+    body: `
+      <div class="d-h2">Overview</div>
+      <p class="d-p">At a high-volume ophthalmology clinic serving 120–250 patients daily, I was responsible for training new clinical technicians. The clinic hired people from all backgrounds, pre-med students, insurance workers, even film editors, and expected them to quickly master refraction, intraocular pressure testing, patient interviews, and EMR documentation. Onboarding typically took six weeks. With a new employee starting nearly every week, I personally trained more than 20 people.</p>
+
+      <div class="d-h2">The Challenge</div>
+      <p class="d-p">The biggest bottleneck was documentation. New techs didn't know how to log patient information consistently or connect patient-reported symptoms to relevant medical history. A patient might say "my eyes are itchy," and the conversation would spiral around irritation, while missing critical information about vision quality, flashes, or floaters. The result: frustrated doctors, patient backlogs, and wasted time.</p>
+
+      <div class="d-h2">The Approach</div>
+      <p class="d-p">I partnered with clinical and assistant managers to co-create a documentation framework that broke complex information into intuitive categories:</p>
+      <ul class="d-ul">
+        <li><strong>Quality</strong> → quality of vision (blurry, glare, double vision)</li>
+        <li><strong>Associated Symptoms</strong> → physical issues like pain or discomfort</li>
+        <li><strong>Pertinent Negatives</strong> → critical "red flag" questions that should remain negative unless something is wrong (flashes, floaters, headaches)</li>
+      </ul>
+      <p class="d-p">I turned medical jargon into natural-language memory hooks and built condition-specific guides (cataract evaluation, glaucoma follow-up, diabetes exams). I also adapted training methods by learning style: visual learners studied the framework first, hands-on learners practiced under supervision, others alternated shadowing with immediate feedback.</p>
+
+      <div class="d-h2">Outcome</div>
+      <div class="d-findings">
+        <div class="d-finding"><div class="d-finding-stat">33–50%</div><div class="d-finding-text">reduction in onboarding time, from six weeks to 3–4 weeks</div></div>
+        <div class="d-finding"><div class="d-finding-stat">10+ min</div><div class="d-finding-text">saved per appointment as doctors received more accurate, relevant patient histories</div></div>
+        <div class="d-finding"><div class="d-finding-stat">20+</div><div class="d-finding-text">people personally trained through the new system</div></div>
+      </div>
+
+      <div class="d-h2">Key Learnings</div>
+      <div class="d-learnings">
+        <div class="d-learning"><div class="d-learning-title">Frameworks Guide Conversations</div><div class="d-learning-body">The framework gave trainees control. They felt less overwhelmed because it kept them from getting lost in patient stories.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Intuitive Memory Hooks Work Better Than Lists</div><div class="d-learning-body">By translating jargon into intuitive prompts, I made learning easier than expected. The biggest surprise was how quickly new techs could apply complex medical concepts.</div></div>
+      </div>
+    `
+  },
+
+  roi: {
+    kicker: "Vision Technology · Systems Design · Startup Research",
+    title: "Glasses for Life, Rethinking Vision as Living Data",
+    sub: "As founder of Ro'i, leading design research into adaptive eyewear that treats a prescription as software, updatable, never replaced.",
+    role: "Founder & Design Researcher", company: "Ro'i Adaptive Eyewear", duration: "Active Development",
+    body: `
+      <div class="d-h2">The Vision</div>
+      <div class="d-pull"><p>"What if a prescription wasn't a fixed artifact, but living data? One pair of glasses, updated by your optician through software, that evolves with you for life."</p></div>
+      <p class="d-p">Ro'i is built on a single insight: glasses shouldn't expire just because your eyes change. Using liquid crystal lens technology, we're developing eyewear where the optician updates your prescription through software, no new frames, no manufacturing, no waste.</p>
+
+      <div class="d-h2">Research Challenge</div>
+      <p class="d-p">Before building, I needed to understand: How do people actually experience vision change over time? What is the optician's workflow and where does friction exist? What would it take for someone to trust a "software-updated prescription"?</p>
+
+      <div class="d-h2">Research Approach</div>
+      <div class="d-methods">
+        <div class="d-method"><div class="d-method-name">Contextual Inquiry</div><div class="d-method-desc">Observed optician workflows and patient interactions to map friction in current vision correction systems</div></div>
+        <div class="d-method"><div class="d-method-name">Stakeholder Interviews</div><div class="d-method-desc">Interviewed opticians, patients with presbyopia, and ophthalmic professionals to understand trust, workflow, and adoption barriers</div></div>
+        <div class="d-method"><div class="d-method-name">Systems Mapping</div><div class="d-method-desc">Mapped the full ecosystem: patient journey, optician workflow, regulatory requirements, and technology constraints</div></div>
+      </div>
+
+      <div class="d-h2">Key Insights</div>
+      <div class="d-learnings">
+        <div class="d-learning"><div class="d-learning-title">Trust lives in the optician relationship</div><div class="d-learning-body">Patients don't trust technology, they trust their optician. Any solution that bypasses this relationship will fail. Design insight: make the optician the updater, not an app.</div></div>
+        <div class="d-learning"><div class="d-learning-title">The emotional argument trumps the rational one</div><div class="d-learning-body">Patients responded overwhelmingly to "glasses for life." The environmental and economic argument was secondary, the feeling of continuity and care was primary.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Regulatory strategy is design strategy</div><div class="d-learning-body">Positioning as a Class I medical device within existing optician workflows fundamentally shaped the product architecture. Regulatory constraints became design constraints.</div></div>
+        <div class="d-learning"><div class="d-learning-title">Intent inference is the core UX problem</div><div class="d-learning-body">The critical question isn't "can the lens change?", it's "does the system know when and how to change it?" User research revealed that seamless adaptation matters more than conscious control.</div></div>
+      </div>
+
+      <div class="d-h2">Product Roadmap</div>
+      <div class="d-recs">
+        <div class="d-rec"><div class="d-rec-title">Gen 1, Presbyopia Correction</div><div class="d-rec-body">Liquid crystal lenses that shift focal power dynamically, enabling near-to-distance adaptation without bifocal lines.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Gen 2, Full Prescription Update</div><div class="d-rec-body">Software-updatable prescriptions covering astigmatism and full spherical correction, opticians update via interface, no new manufacturing.</div></div>
+        <div class="d-rec"><div class="d-rec-title">Core, Intent Inference</div><div class="d-rec-body">Sensor hierarchy and on-device processing that understands what the wearer is trying to see, adapting before they consciously notice the need.</div></div>
+      </div>
+
+      <div class="d-h2">Status</div>
+      <div class="d-outcome"><p>Ro'i is in active development, navigating the regulatory pathway as a Class I medical device. The research has validated the core insight: the opportunity isn't just better lenses, it's rethinking the entire relationship between a person, their vision, and the system that serves it.</p></div>
+    `
+  }
+};
+
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('case-detail').classList.remove('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const page = document.getElementById(id);
+  if (page) { page.classList.add('active'); window.scrollTo(0,0); }
+  const nav = document.getElementById('nav-' + id);
+  if (nav) nav.classList.add('active');
+}
+
+function showCase(id) {
+  const c = cases[id];
+  if (!c) return;
+  document.getElementById('detail-content').innerHTML = `
+    <button class="detail-back" onclick="showPage('work')">← Back to Work</button>
+    <p class="detail-kicker">${c.kicker}</p>
+    <h1 class="detail-h1">${c.title}</h1>
+    <p class="detail-sub">${c.sub}</p>
+    <div class="detail-meta">
+      <div><div class="d-meta-lbl">Role</div><div class="d-meta-val">${c.role}</div></div>
+      <div><div class="d-meta-lbl">Company</div><div class="d-meta-val">${c.company}</div></div>
+      <div><div class="d-meta-lbl">Duration</div><div class="d-meta-val">${c.duration}</div></div>
+    </div>
+    ${c.body}
+  `;
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('case-detail').classList.add('active');
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  document.getElementById('nav-work').classList.add('active');
+  window.scrollTo(0,0);
+}
+</script>
+</body>
+</html>
